@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        let search = document.location.search;
+        let filmid = search.split("=")[1];
+        let box = document.getElementById('box');
+        fetch("https://api.themoviedb.org/3/movie/popular?api_key=8ae45c300d682e96e1824fe6b1d094b8")
+            .then(res => res.json())
+            .then(data => {
+                data.results.forEach(index => {
+                    if (filmid == index.id) {
+                        box.innerHTML = `
+               <img width src="https://image.tmdb.org/t/p/w500/${index.poster_path}" >
+               <h3>${index.title}</h3>
+               <p>Overview: ${index.overview}`
+               
+                    }
+
+                })
+            })
+
+    </script>
+</body>
+
+</html>
